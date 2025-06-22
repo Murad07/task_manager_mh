@@ -3,32 +3,40 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
 function Dashboard() {
-    const [data, setData] = useState([])
+    const [users, setUsers] = useState([])
+    const [tasks, setTasks] = useState([])
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [role, setRole] = useState('user')
+    const [roleInput, setRoleInput] = useState('user')
 
     const navigate = useNavigate()
     const token = localStorage.getItem('token')
-    const roleUser = localStorage.getItem('role')
-
-    const fetchData = async () => {
-        const url =
-            roleUser === 'admin'
-                ? 'http://localhost:5000/api/users'
-                : 'http://localhost:5000/api/tasks'
-
-        const res = await axios.get(url, {
-            headers: { Authorization: `Bearer ${token}` },
-        })
-
-        setData(res.data)
-    }
+    const role = localStorage.getItem('role')
 
     useEffect(() => {
+        if (!token) return navigate('/')
+
+        const fetchData = async () => {
+            try {
+                if (role === 'admin') {
+                    const res = await axios.get('http://localhost:5000/api/users', {
+                        headers: { Authorization: `Bearer ${token}` },
+                    })
+                    setUsers(res.data)
+                } else {
+                    const res = await axios.get('http://localhost:5000/api/tasks', {
+                        headers: { Authorization: `Bearer ${token}` },
+                    })
+                    setTasks(res.data)
+                }
+            } catch (err) {
+                console.error('Error:', err.response?.data || err.message)
+            }
+        }
+
         fetchData()
-    }, [])
+    }, [token, role, navigate])
 
     const handleLogout = () => {
         localStorage.clear()
@@ -40,27 +48,31 @@ function Dashboard() {
         try {
             await axios.post(
                 'http://localhost:5000/api/users',
-                { name, email, password, role },
+                { name, email, password, role: roleInput },
                 { headers: { Authorization: `Bearer ${token}` } }
             )
-            alert('User added successfully')
+            alert('User added')
             setName('')
             setEmail('')
             setPassword('')
-            setRole('user')
-            fetchData()
+            setRoleInput('user')
+            // re-fetch users
+            const res = await axios.get('http://localhost:5000/api/users', {
+                headers: { Authorization: `Bearer ${token}` },
+            })
+            setUsers(res.data)
         } catch (err) {
-            alert(err.response?.data?.error || 'Error adding user')
+            alert(err.response?.data?.error || 'Failed to add user')
         }
     }
 
     return (
         <div className="dashboard-container">
-            <h2>Welcome {roleUser === 'admin' ? 'Admin' : 'User'}</h2>
+            <h2>Welcome {role === 'admin' ? 'Admin' : 'User'}</h2>
             <button onClick={handleLogout}>Logout</button>
 
-            {roleUser === 'admin' && (
-                <div>
+            {role === 'admin' && (
+                <>
                     <h3>Add New User</h3>
                     <form onSubmit={handleAddUser}>
                         <input
@@ -81,21 +93,32 @@ function Dashboard() {
                             onChange={(e) => setPassword(e.target.value)}
                             required
                         />
-                        <select value={role} onChange={(e) => setRole(e.target.value)}>
+                        <select value={roleInput} onChange={(e) => setRoleInput(e.target.value)}>
                             <option value="user">User</option>
                             <option value="admin">Admin</option>
                         </select>
                         <button type="submit">Add User</button>
                     </form>
-                </div>
+
+                    <h3>All Users</h3>
+                    <ul>
+                        {users.map((user) => (
+                            <li key={user._id}>{user.name} ({user.role})</li>
+                        ))}
+                    </ul>
+                </>
             )}
 
-            <h3>{roleUser === 'admin' ? 'All Users' : 'My Tasks'}</h3>
-            <ul>
-                {data.map((item, i) => (
-                    <li key={i}>{item.name || item.title}</li>
-                ))}
-            </ul>
+            {role === 'user' && (
+                <>
+                    <h3>My Tasks</h3>
+                    <ul>
+                        {tasks.map((task) => (
+                            <li key={task._id}>{task.title}</li>
+                        ))}
+                    </ul>
+                </>
+            )}
         </div>
     )
 }

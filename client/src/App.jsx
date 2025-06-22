@@ -15,6 +15,7 @@ function App() {
         path="/dashboard"
         element={token ? <Dashboard /> : <Navigate to="/" />}
       />
+
     </Routes>
   )
 }
