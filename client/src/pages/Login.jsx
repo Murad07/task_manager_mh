@@ -2,15 +2,20 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
-function Login() {
+function Login({ setToken }) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [loading, setLoading] = useState(true)
     const navigate = useNavigate()
 
     useEffect(() => {
         const token = localStorage.getItem('token')
-        if (token) navigate('/dashboard')
-    }, [])
+        if (token) {
+            navigate('/dashboard')
+        } else {
+            setLoading(false)
+        }
+    }, [navigate])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -21,11 +26,14 @@ function Login() {
             })
             localStorage.setItem('token', res.data.token)
             localStorage.setItem('role', res.data.role)
+            setToken(res.data.token) // ✅ Update App.jsx token state
             navigate('/dashboard')
         } catch (err) {
             alert(err.response?.data?.error || 'Login failed')
         }
     }
+
+    if (loading) return null
 
     return (
         <div className="login-container">

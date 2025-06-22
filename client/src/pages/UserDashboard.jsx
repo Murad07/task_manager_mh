@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
-function UserDashboard() {
+function UserDashboard({ setToken }) {
     const [tasks, setTasks] = useState([])
     const token = localStorage.getItem('token')
     const navigate = useNavigate()
@@ -26,6 +26,7 @@ function UserDashboard() {
 
     const handleLogout = () => {
         localStorage.clear()
+        setToken(null) // ✅ properly update global state
         navigate('/')
     }
 
@@ -43,5 +44,6 @@ function UserDashboard() {
         </div>
     )
 }
+
 
 export default UserDashboard

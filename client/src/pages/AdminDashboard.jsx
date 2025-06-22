@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
-function AdminDashboard() {
+function AdminDashboard({ setToken }) {
     const [users, setUsers] = useState([])
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
@@ -13,10 +13,14 @@ function AdminDashboard() {
     const navigate = useNavigate()
 
     const fetchUsers = async () => {
-        const res = await axios.get('http://localhost:5000/api/users', {
-            headers: { Authorization: `Bearer ${token}` },
-        })
-        setUsers(res.data)
+        try {
+            const res = await axios.get('http://localhost:5000/api/users', {
+                headers: { Authorization: `Bearer ${token}` },
+            })
+            setUsers(res.data)
+        } catch (err) {
+            console.error('Failed to load users:', err)
+        }
     }
 
     useEffect(() => {
@@ -31,7 +35,7 @@ function AdminDashboard() {
                 { name, email, password, role: roleInput },
                 { headers: { Authorization: `Bearer ${token}` } }
             )
-            alert('User added')
+            alert('User added successfully')
             setName('')
             setEmail('')
             setPassword('')
@@ -44,6 +48,7 @@ function AdminDashboard() {
 
     const handleLogout = () => {
         localStorage.clear()
+        setToken(null) // ✅ logout the safe way
         navigate('/')
     }
 
@@ -82,7 +87,9 @@ function AdminDashboard() {
             <h3>All Users</h3>
             <ul>
                 {users.map((user) => (
-                    <li key={user._id}>{user.name} ({user.role})</li>
+                    <li key={user._id}>
+                        {user.name} ({user.role})
+                    </li>
                 ))}
             </ul>
         </div>
