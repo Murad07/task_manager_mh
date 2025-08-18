@@ -37,7 +37,7 @@ function Login({ setToken }) {
 
     return (
         <div className="login-container">
-            <h2>Login</h2>
+            <h2 style={{ textAlign: 'center' }}>Welcome To Task Manager</h2>
             <form onSubmit={handleSubmit}>
                 <input
                     type="email"
