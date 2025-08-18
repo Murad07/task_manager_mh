@@ -61,8 +61,10 @@ button {
   display: flex;
   align-items: center;
   color: #007bff;
-  width: auto; /* Override default button width */
-  margin-top: 0; /* Override default button margin */
+  width: auto;
+  /* Override default button width */
+  margin-top: 0;
+  /* Override default button margin */
   gap: 0.5rem;
 }
 
@@ -82,7 +84,8 @@ button {
   padding: 0.5rem;
   border: 1px solid #ccc;
   border-radius: 4px;
-  appearance: none; /* Remove default arrow */
+  appearance: none;
+  /* Remove default arrow */
   -webkit-appearance: none;
   -moz-appearance: none;
   background-color: white;
@@ -98,7 +101,8 @@ button {
   top: 50%;
   right: 1rem;
   transform: translateY(-50%);
-  pointer-events: none; /* Make arrow non-interactive */
+  pointer-events: none;
+  /* Make arrow non-interactive */
 }
 
 .select-wrapper select:focus {
@@ -121,12 +125,16 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
   transition: box-shadow 0.3s ease;
+  border-left-width: 5px;
+  border-left-style: solid;
+  position: relative;
+  overflow: visible;
 }
 
 .task-card:hover {
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .task-card-content {
@@ -146,7 +154,7 @@ button {
 .task-card-actions {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.1rem;
   margin-left: 1rem;
 }
 
@@ -161,6 +169,8 @@ button {
   justify-content: center;
   color: #555;
   transition: background-color 0.3s ease, color 0.3s ease;
+  width: fit-content;
+  margin-top: 0;
 }
 
 .icon-button:hover {
@@ -169,7 +179,8 @@ button {
 }
 
 .delete-button:hover {
-  color: #e53935; /* red */
+  color: #e53935;
+  /* red */
   background-color: #ffebee;
 }
 
@@ -180,8 +191,9 @@ button {
 }
 
 .task-status-select {
-  width: 120px;
+  width: 110px;
   margin: 0;
+  margin-right: 0.5rem;
 }
 
 .task-status-select select {
@@ -195,9 +207,32 @@ button {
   font-size: 0.8rem;
 }
 
-.status-to-do { background-color: #ffcdd2; color: #c62828; }
-.status-ongoing { background-color: #bbdefb; color: #1565c0; }
-.status-completed { background-color: #c8e6c9; color: #2e7d32; }
+.status-to-do {
+  background-color: #ffcdd2;
+  color: #c62828;
+}
+
+.status-ongoing {
+  background-color: #bbdefb;
+  color: #1565c0;
+}
+
+.status-completed {
+  background-color: #c8e6c9;
+  color: #2e7d32;
+}
+
+.status-border-to-do {
+  border-left-color: #c62828;
+}
+
+.status-border-ongoing {
+  border-left-color: #1565c0;
+}
+
+.status-border-completed {
+  border-left-color: #2e7d32;
+}
 
 /* User Dashboard Layout */
 .user-dashboard-layout {
@@ -221,7 +256,7 @@ button {
 }
 
 .task-form-container {
-    margin-top: 1rem;
+  margin-top: 1rem;
 }
 
 /* Mobile Responsive Styles */

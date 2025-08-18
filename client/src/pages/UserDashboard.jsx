@@ -148,7 +148,7 @@ function UserDashboard({ setToken }) {
                 <h3>My Tasks</h3>
                 <div className="tasks-list">
                     {tasks.map((task) => (
-                        <div key={task._id} className="task-card">
+                        <div key={task._id} className={`task-card status-border-${task.status.toLowerCase().replace(' ', '-')}`}>
                             <div className="task-card-content">
                                 <strong>{task.title}</strong>
                                 {task.description && <p>{task.description}</p>}
