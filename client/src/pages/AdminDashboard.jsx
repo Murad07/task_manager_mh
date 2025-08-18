@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import useWindowSize from '../hooks/useWindowSize'
+import './AdminDashboard.css'
 
 function AdminDashboard({ setToken }) {
     const { width } = useWindowSize()
@@ -55,52 +56,57 @@ function AdminDashboard({ setToken }) {
     }
 
     return (
-        <div className="dashboard-container">
-            <div className="dashboard-header">
-                <h2>Welcome Admin</h2>
-                <button onClick={handleLogout} className="logout-button" title="Logout">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
-                    {width < 768 && <span>Logout</span>}
-                </button>
-            </div>
-
-            <h3>Add New User</h3>
-            <form onSubmit={handleAddUser}>
-                <input
-                    placeholder="Name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required
-                />
-                <input
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                />
-                <input
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                />
-                <div className="select-wrapper">
-                    <select value={roleInput} onChange={(e) => setRoleInput(e.target.value)}>
-                        <option value="user">User</option>
-                        <option value="admin">Admin</option>
-                    </select>
+        <div className="admin-dashboard-container">
+            <div className="left-panel">
+                <div className="dashboard-header">
+                    <h2>Welcome Admin</h2>
+                    <button onClick={handleLogout} className="logout-button" title="Logout">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                        {width < 768 && <span>Logout</span>}
+                    </button>
                 </div>
-                <button type="submit">Add User</button>
-            </form>
 
-            <h3>All Users</h3>
-            <ul>
-                {users.map((user) => (
-                    <li key={user._id}>
-                        {user.name} ({user.role})
-                    </li>
-                ))}
-            </ul>
+                <div className="add-user-card">
+                    <h3>Add New User</h3>
+                    <form onSubmit={handleAddUser}>
+                        <input
+                            placeholder="Name"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            required
+                        />
+                        <input
+                            placeholder="Email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
+                        <input
+                            placeholder="Password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
+                        <div className="select-wrapper">
+                            <select value={roleInput} onChange={(e) => setRoleInput(e.target.value)}>
+                                <option value="user">User</option>
+                                <option value="admin">Admin</option>
+                            </select>
+                        </div>
+                        <button type="submit">Add User</button>
+                    </form>
+                </div>
+            </div>
+            <div className="right-panel">
+                <h3>All Users</h3>
+                <ul className="user-list">
+                    {users.map((user) => (
+                        <li key={user._id}>
+                            {user.name} ({user.role})
+                        </li>
+                    ))}
+                </ul>
+            </div>
         </div>
     )
 }
