@@ -8,6 +8,7 @@ function UserDashboard({ setToken }) {
     const [tasks, setTasks] = useState([])
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
+    const [targetDate, setTargetDate] = useState(new Date().toISOString().slice(0, 10))
     const [editTaskId, setEditTaskId] = useState(null) // track editing task
     const token = localStorage.getItem('token')
     const navigate = useNavigate()
@@ -33,11 +34,12 @@ function UserDashboard({ setToken }) {
         try {
             await axios.post(
                 'http://localhost:5000/api/tasks',
-                { title, description },
+                { title, description, target_date: targetDate },
                 { headers: { Authorization: `Bearer ${token}` } }
             )
             setTitle('')
             setDescription('')
+            setTargetDate(new Date().toISOString().slice(0, 10))
             fetchTasks()
         } catch (err) {
             alert(err.response?.data?.error || 'Error adding task')
@@ -48,6 +50,7 @@ function UserDashboard({ setToken }) {
         setEditTaskId(task._id)
         setTitle(task.title)
         setDescription(task.description || '')
+        setTargetDate(task.target_date ? new Date(task.target_date).toISOString().slice(0, 10) : new Date().toISOString().slice(0, 10))
     }
 
     const handleUpdateTask = async (e) => {
@@ -55,11 +58,12 @@ function UserDashboard({ setToken }) {
         try {
             await axios.put(
                 `http://localhost:5000/api/tasks/${editTaskId}`,
-                { title, description },
+                { title, description, target_date: targetDate },
                 { headers: { Authorization: `Bearer ${token}` } }
             )
             setTitle('')
             setDescription('')
+            setTargetDate(new Date().toISOString().slice(0, 10))
             setEditTaskId(null)
             fetchTasks()
         } catch (err) {
@@ -71,6 +75,7 @@ function UserDashboard({ setToken }) {
         setEditTaskId(null)
         setTitle('')
         setDescription('')
+        setTargetDate(new Date().toISOString().slice(0, 10))
     }
 
     const handleDeleteTask = async (id) => {
@@ -113,6 +118,12 @@ function UserDashboard({ setToken }) {
                     placeholder="Description (optional)"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
+                />
+                <input
+                    type="date"
+                    value={targetDate}
+                    onChange={(e) => setTargetDate(e.target.value)}
+                    required
                 />
                 <button type="submit">{editTaskId ? 'Update Task' : 'Add Task'}</button>
                 {editTaskId && <button onClick={handleCancelEdit} type="button">Cancel</button>}
