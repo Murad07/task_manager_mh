@@ -1,12 +1,76 @@
-# React + Vite
+# Task Manager - Client
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the frontend for the Task Manager application, built with React and Vite.
 
-Currently, two official plugins are available:
+## Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The client application provides a user interface for interacting with the Task Manager API. It allows users to log in, manage their tasks, and if they are an administrator, manage other users.
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+-   **Authentication:** Secure login for users.
+-   **User Dashboard:**
+    -   View all personal tasks.
+    -   Add new tasks.
+    -   Edit existing tasks.
+    -   Delete tasks.
+-   **Admin Dashboard:**
+    -   View all users in the system.
+    -   Add new users (both 'user' and 'admin' roles).
+-   **Role-based Access Control:** The application displays different dashboards based on the user's role (either 'user' or 'admin').
+
+## Technologies Used
+
+-   **React:** A JavaScript library for building user interfaces.
+-   **Vite:** A fast build tool and development server for modern web projects.
+-   **React Router:** For handling routing within the application.
+-   **Axios:** For making HTTP requests to the backend API.
+
+## Setup and Installation
+
+1.  **Navigate to the client directory:**
+    ```bash
+    cd client
+    ```
+
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
+
+3.  **Run the development server:**
+    ```bash
+    npm run dev
+    ```
+    The application will be available at `http://localhost:5173` (or another port if 5173 is in use).
+
+## Folder Structure
+
+```
+client/
+├── src/
+│   ├── assets/         # Static assets like images and SVGs
+│   ├── pages/          # React components for different pages
+│   │   ├── AdminDashboard.jsx
+│   │   ├── Dashboard.jsx
+│   │   ├── Login.jsx
+│   │   └── UserDashboard.jsx
+│   ├── App.jsx         # Main application component with routing
+│   ├── main.jsx        # Entry point of the React application
+│   └── index.css       # Global styles
+├── .gitignore
+├── index.html          # Main HTML file
+├── package.json        # Project dependencies and scripts
+└── vite.config.js      # Vite configuration
+```
+
+## API Interaction
+
+The frontend communicates with a backend server, which is expected to be running at `http://localhost:5000`. The API endpoints it uses are:
+-   `POST /api/auth/login`
+-   `GET /api/users`
+-   `POST /api/users`
+-   `GET /api/tasks`
+-   `POST /api/tasks`
+-   `PUT /api/tasks/:id`
+-   `DELETE /api/tasks/:id`
