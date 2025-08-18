@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import useWindowSize from '../hooks/useWindowSize'
 
 function AdminDashboard({ setToken }) {
+    const { width } = useWindowSize()
     const [users, setUsers] = useState([])
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
@@ -54,8 +56,13 @@ function AdminDashboard({ setToken }) {
 
     return (
         <div className="dashboard-container">
-            <h2>Welcome Admin</h2>
-            <button onClick={handleLogout}>Logout</button>
+            <div className="dashboard-header">
+                <h2>Welcome Admin</h2>
+                <button onClick={handleLogout} className="logout-button" title="Logout">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                    {width < 768 && <span>Logout</span>}
+                </button>
+            </div>
 
             <h3>Add New User</h3>
             <form onSubmit={handleAddUser}>
