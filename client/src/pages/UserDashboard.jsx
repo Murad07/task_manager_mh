@@ -27,7 +27,7 @@ function UserDashboard({ setToken }) {
 
     const fetchTasks = async () => {
         try {
-            const res = await axios.get('http://localhost:5000/api/tasks', {
+            const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/tasks`, {
                 headers: { Authorization: `Bearer ${token}` },
             })
             setTasks(res.data)
@@ -39,7 +39,7 @@ function UserDashboard({ setToken }) {
     const handleStatusChange = async (taskId, newStatus) => {
         try {
             await axios.put(
-                `http://localhost:5000/api/tasks/${taskId}`,
+                `${import.meta.env.VITE_API_BASE_URL}/api/tasks/${taskId}`,
                 { status: newStatus },
                 { headers: { Authorization: `Bearer ${token}` } }
             );
@@ -53,7 +53,7 @@ function UserDashboard({ setToken }) {
         e.preventDefault()
         try {
             await axios.post(
-                'http://localhost:5000/api/tasks',
+                `${import.meta.env.VITE_API_BASE_URL}/api/tasks`,
                 { title, description, target_date: targetDate },
                 { headers: { Authorization: `Bearer ${token}` } }
             )
@@ -77,7 +77,7 @@ function UserDashboard({ setToken }) {
         e.preventDefault()
         try {
             await axios.put(
-                `http://localhost:5000/api/tasks/${editTaskId}`,
+                `${import.meta.env.VITE_API_BASE_URL}/api/tasks/${editTaskId}`,
                 { title, description, target_date: targetDate },
                 { headers: { Authorization: `Bearer ${token}` } }
             )
@@ -109,7 +109,7 @@ function UserDashboard({ setToken }) {
 
     const handleDeleteTask = async (id) => {
         try {
-            await axios.delete(`http://localhost:5000/api/tasks/${id}`, {
+            await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/api/tasks/${id}`, {
                 headers: { Authorization: `Bearer ${token}` },
             })
             fetchTasks()

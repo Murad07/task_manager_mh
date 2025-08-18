@@ -24,7 +24,7 @@ function AdminDashboard({ setToken }) {
 
     const fetchUsers = async () => {
         try {
-            const res = await axios.get('http://localhost:5000/api/users', {
+            const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/users`, {
                 headers: { Authorization: `Bearer ${token}` },
             })
             setUsers(res.data)
@@ -41,7 +41,7 @@ function AdminDashboard({ setToken }) {
         e.preventDefault()
         try {
             await axios.post(
-                'http://localhost:5000/api/users',
+                `${import.meta.env.VITE_API_BASE_URL}/api/users`,
                 { name, email, password, role: roleInput },
                 { headers: { Authorization: `Bearer ${token}` } }
             )
@@ -67,7 +67,7 @@ function AdminDashboard({ setToken }) {
 
     const handleDeleteUser = async (userId) => {
         try {
-            await axios.delete(`http://localhost:5000/api/users/${userId}`, {
+            await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/api/users/${userId}`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
             fetchUsers();
