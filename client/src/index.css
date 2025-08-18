@@ -276,4 +276,16 @@ button {
     overflow-y: visible;
     padding-right: 0;
   }
+
+  .task-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .task-card-actions {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 1rem;
+    justify-content: flex-end;
+  }
 }
