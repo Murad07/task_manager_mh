@@ -8,7 +8,8 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center children horizontally */
+    align-items: center;
+    /* Center children horizontally */
     position: sticky;
     top: 1rem;
     align-self: flex-start;
@@ -22,7 +23,8 @@
 
 .dashboard-header {
     width: 100%;
-    max-width: 500px; /* Or some max-width to align with the card */
+    max-width: 500px;
+    /* Or some max-width to align with the card */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -33,7 +35,7 @@
     background-color: #ffffff;
     padding: 2rem;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 500px;
 }
@@ -59,11 +61,15 @@
         position: static;
         height: auto;
         overflow-y: visible;
-        align-items: stretch; /* Full width on mobile */
+        align-items: stretch;
+        /* Full width on mobile */
     }
+
     .add-user-card {
-        max-width: none; /* Full width on mobile */
+        max-width: none;
+        /* Full width on mobile */
     }
+
     .dashboard-header {
         max-width: none;
     }
@@ -81,7 +87,6 @@
     margin-bottom: 5px;
     border-radius: 4px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
 }
 
@@ -92,8 +97,41 @@
     padding: 5px;
     color: #ff4d4f;
     line-height: 1;
+    margin-left: auto;
+    flex-shrink: 0;
+    width: fit-content;
 }
 
 .delete-user-button:hover {
     color: #d9363e;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    min-width: 300px;
+    max-width: 90%;
+}
+
+.modal-actions {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
 }
