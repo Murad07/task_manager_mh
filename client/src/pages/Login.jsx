@@ -36,25 +36,27 @@ function Login({ setToken }) {
     if (loading) return null
 
     return (
-        <div className="login-container">
-            <h2 style={{ textAlign: 'center' }}>Welcome To Task Manager</h2>
-            <form onSubmit={handleSubmit}>
-                <input
-                    type="email"
-                    placeholder="Email"
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-                <input
-                    type="password"
-                    placeholder="Password"
-                    required
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-                <button type="submit">Login</button>
-            </form>
+        <div className="login-page-wrapper">
+            <div className="login-container">
+                <h2 style={{ textAlign: 'center' }}>Welcome To Task Manager</h2>
+                <form onSubmit={handleSubmit}>
+                    <input
+                        type="email"
+                        placeholder="Email"
+                        required
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <input
+                        type="password"
+                        placeholder="Password"
+                        required
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <button type="submit">Login</button>
+                </form>
+            </div>
         </div>
     )
 }
