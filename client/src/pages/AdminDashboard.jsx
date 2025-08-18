@@ -97,7 +97,7 @@ function AdminDashboard({ setToken }) {
                             {modal.type === 'confirm' ? (
                                 <>
                                     <button onClick={() => {
-                                        if(modal.onConfirm) modal.onConfirm();
+                                        if (modal.onConfirm) modal.onConfirm();
                                     }}>Confirm</button>
                                     <button onClick={closeModal}>Cancel</button>
                                 </>
@@ -110,15 +110,17 @@ function AdminDashboard({ setToken }) {
             )}
             <div className="admin-dashboard-container">
                 <div className="left-panel">
-                    <div className="dashboard-header">
-                        <h2>Welcome Admin</h2>
-                        <button onClick={handleLogout} className="logout-button" title="Logout">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
-                            {width < 768 && <span>Logout</span>}
-                        </button>
-                    </div>
 
-                    <div className="add-user-card">
+
+                    <div className="card-style">
+                        <div className="dashboard-header">
+                            <h2>Welcome Admin</h2>
+                            <button onClick={handleLogout} className="logout-button" title="Logout">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                                {width < 768 && <span>Logout</span>}
+                            </button>
+                        </div>
+
                         <h3>Add New User</h3>
                         <form onSubmit={handleAddUser}>
                             <input
@@ -149,7 +151,7 @@ function AdminDashboard({ setToken }) {
                         </form>
                     </div>
                 </div>
-                <div className="right-panel">
+                <div className="right-panel ">
                     <h3>All Users</h3>
                     <ul className="user-list">
                         {users.map((user) => (
