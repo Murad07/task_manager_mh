@@ -1,7 +1,7 @@
 body {
   font-family: sans-serif;
-  padding: 2rem;
   background: #f4f4f4;
+  margin: 0;
 }
 
 .login-container,
@@ -108,7 +108,7 @@ button {
 }
 
 .tasks-list {
-  margin-top: 2rem;
+  margin-top: 1rem;
   display: grid;
   gap: 1rem;
 }
@@ -145,6 +145,7 @@ button {
 
 .task-card-actions {
   display: flex;
+  align-items: center;
   gap: 0.5rem;
   margin-left: 1rem;
 }
@@ -197,3 +198,47 @@ button {
 .status-to-do { background-color: #ffcdd2; color: #c62828; }
 .status-ongoing { background-color: #bbdefb; color: #1565c0; }
 .status-completed { background-color: #c8e6c9; color: #2e7d32; }
+
+/* User Dashboard Layout */
+.user-dashboard-layout {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  gap: 2rem;
+  height: 100vh;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+.left-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.right-panel {
+  overflow-y: auto;
+  padding-right: 1rem;
+}
+
+.task-form-container {
+    margin-top: 1rem;
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  .user-dashboard-layout {
+    grid-template-columns: 1fr;
+    height: auto;
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .left-panel {
+    justify-content: flex-start;
+  }
+
+  .right-panel {
+    overflow-y: visible;
+    padding-right: 0;
+  }
+}
