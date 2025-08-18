@@ -96,6 +96,19 @@ function UserDashboard({ setToken }) {
         navigate('/')
     }
 
+    const handleStatusChange = async (taskId, newStatus) => {
+        try {
+            await axios.put(
+                `http://localhost:5000/api/tasks/${taskId}`,
+                { status: newStatus },
+                { headers: { Authorization: `Bearer ${token}` } }
+            );
+            fetchTasks(); // Refresh tasks to show the update
+        } catch (err) {
+            alert(err.response?.data?.error || 'Error updating task status');
+        }
+    };
+
     return (
         <div className="dashboard-container">
             <div className="dashboard-header">
@@ -136,12 +149,27 @@ function UserDashboard({ setToken }) {
                         <div className="task-card-content">
                             <strong>{task.title}</strong>
                             {task.description && <p>{task.description}</p>}
+                            {task.target_date && (
+                                <p className="task-date">
+                                    Target: {new Date(task.target_date).toLocaleDateString()}
+                                </p>
+                            )}
                         </div>
                         <div className="task-card-actions">
-                            <button onClick={() => handleEditClick(task)} className="icon-button">
+                            <div className="select-wrapper task-status-select">
+                                <select
+                                    value={task.status}
+                                    onChange={(e) => handleStatusChange(task._id, e.target.value)}
+                                    className={`status-${task.status.toLowerCase().replace(' ', '-')}`}>
+                                    <option value="To Do">To Do</option>
+                                    <option value="Ongoing">Ongoing</option>
+                                    <option value="Completed">Completed</option>
+                                </select>
+                            </div>
+                            <button onClick={() => handleEditClick(task)} className="icon-button" title="Edit Task">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
                             </button>
-                            <button onClick={() => handleDeleteTask(task._id)} className="icon-button delete-button">
+                            <button onClick={() => handleDeleteTask(task._id)} className="icon-button delete-button" title="Delete Task">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
                             </button>
                         </div>

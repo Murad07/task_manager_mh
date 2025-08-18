@@ -171,3 +171,29 @@ button {
   color: #e53935; /* red */
   background-color: #ffebee;
 }
+
+.task-date {
+  margin: 0.5rem 0 0;
+  font-size: 0.9rem;
+  color: #888;
+}
+
+.task-status-select {
+  width: 120px;
+  margin: 0;
+}
+
+.task-status-select select {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.task-status-select.select-wrapper::after {
+  right: 0.5rem;
+  font-size: 0.8rem;
+}
+
+.status-to-do { background-color: #ffcdd2; color: #c62828; }
+.status-ongoing { background-color: #bbdefb; color: #1565c0; }
+.status-completed { background-color: #c8e6c9; color: #2e7d32; }
