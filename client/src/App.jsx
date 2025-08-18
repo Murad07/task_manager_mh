@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import Login from './pages/Login'
 import Dashboard from './pages/Dashboard'
+import Footer from './components/Footer'
 
 function App() {
   const [token, setToken] = useState(null)
@@ -16,17 +17,22 @@ function App() {
   if (loading) return <div>Loading...</div>
 
   return (
-    <Routes>
-      <Route
-        path="/"
-        element={token ? <Navigate to="/dashboard" /> : <Login setToken={setToken} />}
-      />
-      <Route
-        path="/dashboard"
-        element={token ? <Dashboard setToken={setToken} /> : <Navigate to="/" />}
-      />
+    <>
+      <main>
+        <Routes>
+          <Route
+            path="/"
+            element={token ? <Navigate to="/dashboard" /> : <Login setToken={setToken} />}
+          />
+          <Route
+            path="/dashboard"
+            element={token ? <Dashboard setToken={setToken} /> : <Navigate to="/" />}
+          />
 
-    </Routes>
+        </Routes>
+      </main>
+      <Footer />
+    </>
   )
 }
 
