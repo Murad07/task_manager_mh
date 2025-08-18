@@ -16,13 +16,23 @@ router.post('/', verifyToken, async (req, res) => {
 
 // PUT /api/tasks/:id - update a task
 router.put('/:id', verifyToken, async (req, res) => {
-    const { title, description } = req.body
+    const { title, description, status, target_date } = req.body
     try {
         const task = await Task.findOne({ _id: req.params.id, userId: req.user.id })
         if (!task) return res.status(404).json({ error: 'Task not found' })
 
         task.title = title || task.title
         task.description = description || task.description
+        task.status = status || task.status
+        task.target_date = target_date || task.target_date
+        
+        // If status is 'Completed', set completed to true.
+        if (status === 'Completed') {
+            task.completed = true;
+        } else {
+            task.completed = false;
+        }
+
         await task.save()
 
         res.json(task)

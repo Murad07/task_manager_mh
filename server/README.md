@@ -97,16 +97,16 @@ This will create two users with the password `123456`:
 
 -   **`GET /api/tasks`**
     -   **Description:** Retrieves all tasks for the authenticated user.
-    -   **Response:** `[{ "_id": "...", "title": "...", "description": "...", "userId": "..." }]`
+    -   **Response:** `[{ "_id": "...", "title": "...", "description": "...", "status": "...", "target_date": "...", "userId": "..." }]`
 
 -   **`POST /api/tasks`**
     -   **Description:** Creates a new task for the authenticated user.
-    -   **Body:** `{ "title": "My New Task", "description": "Task details" }`
+    -   **Body:** `{ "title": "My New Task", "description": "Task details", "status": "To Do", "target_date": "2025-12-31" }`
     -   **Response:** `{ "_id": "...", "title": "My New Task", ... }`
 
 -   **`PUT /api/tasks/:id`**
     -   **Description:** Updates a specific task for the authenticated user.
-    -   **Body:** `{ "title": "Updated Title", "description": "Updated details" }`
+    -   **Body:** `{ "title": "Updated Title", "description": "Updated details", "status": "Ongoing", "target_date": "2026-01-15" }`
     -   **Response:** `{ "_id": "...", "title": "Updated Title", ... }`
 
 -   **`DELETE /api/tasks/:id`**
