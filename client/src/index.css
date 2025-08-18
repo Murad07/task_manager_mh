@@ -65,3 +65,40 @@ button {
 .logout-button:hover {
   color: #0056b3;
 }
+
+.select-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  margin: 0.5rem 0;
+}
+
+.select-wrapper select {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  appearance: none; /* Remove default arrow */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: white;
+  cursor: pointer;
+}
+
+/* Custom arrow */
+.select-wrapper::after {
+  content: '▼';
+  font-size: 1rem;
+  color: #555;
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
+  pointer-events: none; /* Make arrow non-interactive */
+}
+
+.select-wrapper select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}

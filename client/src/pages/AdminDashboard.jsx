@@ -84,10 +84,12 @@ function AdminDashboard({ setToken }) {
                     onChange={(e) => setPassword(e.target.value)}
                     required
                 />
-                <select value={roleInput} onChange={(e) => setRoleInput(e.target.value)}>
-                    <option value="user">User</option>
-                    <option value="admin">Admin</option>
-                </select>
+                <div className="select-wrapper">
+                    <select value={roleInput} onChange={(e) => setRoleInput(e.target.value)}>
+                        <option value="user">User</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
                 <button type="submit">Add User</button>
             </form>
 
