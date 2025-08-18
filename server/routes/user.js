@@ -25,4 +25,24 @@ router.post('/', verifyToken, requireRole('admin'), async (req, res) => {
     }
 });
 
+// DELETE a user (admin only)
+router.delete('/:id', verifyToken, requireRole('admin'), async (req, res) => {
+    try {
+        const user = await User.findById(req.params.id);
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        if (['admin@demo.com', 'user@demo.com'].includes(user.email)) {
+            return res.status(403).json({ error: 'This user cannot be deleted.' });
+        }
+
+        await User.findByIdAndDelete(req.params.id);
+
+        res.json({ message: 'User deleted successfully' });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
 module.exports = router;

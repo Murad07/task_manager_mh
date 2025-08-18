@@ -80,4 +80,20 @@
     padding: 10px;
     margin-bottom: 5px;
     border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.delete-user-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    color: #ff4d4f;
+    line-height: 1;
+}
+
+.delete-user-button:hover {
+    color: #d9363e;
 }

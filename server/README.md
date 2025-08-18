@@ -91,6 +91,10 @@ This will create two users with the password `123456`:
     -   **Body:** `{ "name": "New User", "email": "new@example.com", "password": "password123", "role": "user" }`
     -   **Response:** `{ "message": "User created successfully" }`
 
+-   **`DELETE /api/users/:id`**
+    -   **Description:** Deletes a user. Note: The default `admin@demo.com` and `user@demo.com` users cannot be deleted.
+    -   **Response:** `{ "message": "User deleted successfully" }`
+
 ### Task Routes
 
 *Authentication required: Bearer Token*

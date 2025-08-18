@@ -70,6 +70,7 @@ The frontend communicates with a backend server, which is expected to be running
 -   `POST /api/auth/login`
 -   `GET /api/users`
 -   `POST /api/users`
+-   `DELETE /api/users/:id`
 -   `GET /api/tasks`
 -   `POST /api/tasks`
 -   `PUT /api/tasks/:id`
