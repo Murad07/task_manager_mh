@@ -261,6 +261,11 @@ button {
 
 /* Mobile Responsive Styles */
 @media (max-width: 768px) {
+  .login-page-wrapper {
+    padding: 0 1rem;
+    box-sizing: border-box;
+  }
+
   .user-dashboard-layout {
     grid-template-columns: 1fr;
     height: auto;
@@ -274,7 +279,7 @@ button {
 
   .right-panel {
     overflow-y: visible;
-    padding-right: 0;
+    /* padding-right: 0; */
   }
 
   .task-card {

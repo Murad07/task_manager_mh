@@ -94,6 +94,12 @@
     align-items: center;
 }
 
+.user-info {
+    overflow-wrap: break-word;
+    word-break: break-word;
+    margin-right: 1rem;
+}
+
 .delete-user-button {
     background: none;
     border: none;
