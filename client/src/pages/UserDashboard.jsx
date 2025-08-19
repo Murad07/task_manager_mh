@@ -153,7 +153,7 @@ function UserDashboard({ setToken }) {
             <div className="user-dashboard-layout">
                 <div className="left-panel">
 
-                    <div className="task-form-container dashboard-container">
+                    <div className="task-form-container">
                         <div className="dashboard-header">
                             <h2>Welcome User</h2>
                             <button onClick={handleLogout} className="logout-button" title="Logout">
