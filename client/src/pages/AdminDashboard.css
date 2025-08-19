@@ -66,12 +66,21 @@
         height: auto;
         overflow-y: visible;
         align-items: stretch;
+        align-self: auto;
         /* Full width on mobile */
+        background-color: #ffffff;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
     .card-style {
         max-width: none;
         /* Full width on mobile */
+        padding: 0;
+        box-shadow: none;
+        border-radius: 0;
+        background-color: transparent;
     }
 
     .dashboard-header {

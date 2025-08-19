@@ -110,8 +110,6 @@ function AdminDashboard({ setToken }) {
             )}
             <div className="admin-dashboard-container">
                 <div className="left-panel">
-
-
                     <div className="card-style">
                         <div className="dashboard-header">
                             <h2>Welcome Admin</h2>
