@@ -93,6 +93,10 @@
     .dashboard-header {
         max-width: none;
     }
+
+    .modal-overlay {
+        padding: 0 1rem;
+    }
 }
 
 .user-list {
