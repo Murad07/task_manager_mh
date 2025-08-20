@@ -14,6 +14,7 @@ The client application provides a user interface for interacting with the Task M
     -   Add new tasks.
     -   Edit existing tasks.
     -   Delete tasks.
+    -   View task statistics in a chart.
 -   **Admin Dashboard:**
     -   View all users in the system.
     -   Add new users (both 'user' and 'admin' roles).
@@ -25,6 +26,8 @@ The client application provides a user interface for interacting with the Task M
 -   **Vite:** A fast build tool and development server for modern web projects.
 -   **React Router:** For handling routing within the application.
 -   **Axios:** For making HTTP requests to the backend API.
+-   **Chart.js:** A flexible JavaScript charting library.
+-   **react-chartjs-2:** React wrapper for Chart.js.
 
 ## Setup and Installation
 
@@ -50,11 +53,18 @@ The client application provides a user interface for interacting with the Task M
 client/
 ├── src/
 │   ├── assets/         # Static assets like images and SVGs
+│   ├── components/     # Reusable components like Footer
+│   │   ├── Footer.jsx
+│   │   └── Footer.css
+│   ├── hooks/          # Custom React hooks
+│   │   └── useWindowSize.js
 │   ├── pages/          # React components for different pages
 │   │   ├── AdminDashboard.jsx
+│   │   ├── AdminDashboard.css
 │   │   ├── Dashboard.jsx
 │   │   ├── Login.jsx
-│   │   └── UserDashboard.jsx
+│   │   ├── UserDashboard.jsx
+│   │   └── UserDashboard.css
 │   ├── App.jsx         # Main application component with routing
 │   ├── main.jsx        # Entry point of the React application
 │   └── index.css       # Global styles
