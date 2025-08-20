@@ -2,6 +2,11 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import useWindowSize from '../hooks/useWindowSize'
+import './UserDashboard.css'
+import { Pie } from 'react-chartjs-2'
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
+
+ChartJS.register(ArcElement, Tooltip, Legend)
 
 function UserDashboard({ setToken }) {
     const { width } = useWindowSize()
@@ -129,6 +134,48 @@ function UserDashboard({ setToken }) {
         setModal({ isOpen: false, message: '', onConfirm: null, type: 'info' });
     };
 
+    const taskStatusCounts = {
+        total: tasks.length,
+        todo: tasks.filter(t => t.status === 'To Do').length,
+        ongoing: tasks.filter(t => t.status === 'Ongoing').length,
+        completed: tasks.filter(t => t.status === 'Completed').length,
+    };
+
+    const chartData = {
+        labels: ['To Do', 'Ongoing', 'Completed'],
+        datasets: [
+            {
+                label: 'Tasks Status',
+                data: [taskStatusCounts.todo, taskStatusCounts.ongoing, taskStatusCounts.completed],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.7)',
+                    'rgba(54, 162, 235, 0.7)',
+                    'rgba(75, 192, 192, 0.7)',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(75, 192, 192, 1)',
+                ],
+                borderWidth: 1,
+            },
+        ],
+    };
+
+    const chartOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'top',
+            },
+            title: {
+                display: true,
+                text: `Total Tasks: ${taskStatusCounts.total}`,
+            },
+        },
+    };
+
     return (
         <>
             {modal.isOpen && (
@@ -150,10 +197,9 @@ function UserDashboard({ setToken }) {
                     </div>
                 </div>
             )}
-            <div className="admin-dashboard-container">
+            <div className="user-dashboard-layout">
                 <div className="left-panel">
-
-                    <div className="card-style">
+                    <div className="task-form-container">
                         <div className="dashboard-header">
                             <h2>Welcome User</h2>
                             <button onClick={handleLogout} className="logout-button" title="Logout">
@@ -184,6 +230,10 @@ function UserDashboard({ setToken }) {
                             <button type="submit">{editTaskId ? 'Update Task' : 'Add Task'}</button>
                             {editTaskId && <button onClick={handleCancelEdit} type="button">Cancel</button>}
                         </form>
+                    </div>
+
+                    <div className="task-chart-container">
+                        <Pie data={chartData} options={chartOptions} />
                     </div>
                 </div>
                 <div className="right-panel">

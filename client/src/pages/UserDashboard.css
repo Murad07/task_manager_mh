@@ -1,0 +1,29 @@
+/* .user-dashboard-layout .left-panel {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 2rem;
+    max-height: calc(100vh - 4rem);
+    overflow-y: auto;
+} */
+
+.task-chart-container {
+    margin-top: 2rem;
+    height: 300px;
+}
+
+@media (max-width: 768px) {
+    /* .user-dashboard-layout .left-panel {
+        padding: 1rem;
+        position: static;
+        transform: none;
+        max-height: none;
+        overflow-y: visible;
+    } */
+
+    .task-chart-container {
+        height: 250px;
+    }
+}
